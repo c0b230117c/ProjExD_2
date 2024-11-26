@@ -30,6 +30,11 @@ def check_bound(rct:pg.Rect) -> tuple[bool,bool]:
     return yoko,tate
 
 def game_over(screen: pg.Surface) -> None:
+    """
+    ゲームオーバー画面表示の関数
+    こうかとんに爆弾が着弾した際に、画面をブラックアウト、
+    泣いているこうかとん画像と「Game Over」の文字列を５秒間表示させる。
+    """
     re = pg.Surface((1100,650))
     pg.draw.rect(re, (0,0,0), (0,1100,0,560))
     #screen = pg.Surface.set_alpha()
