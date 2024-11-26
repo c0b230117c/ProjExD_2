@@ -38,7 +38,7 @@ def game_over(screen: pg.Surface) -> None:
     txt = fonto.render("Game Over", True, (255,255,255))
     txt_rct = txt.get_rect(center=(WIDTH // 2, HEIGHT // 2))
     cry_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)
-    cry_rct = cry_img.get_rect(center=((WIDTH // 4)+80, HEIGHT // 2))
+    cry_rct = cry_img.get_rect(center=((WIDTH // 4)+80, HEIGHT // 2)) #適切な位置に微調整
     cry2_rct = cry_img.get_rect(center=((WIDTH // 4)+100+380, HEIGHT // 2))
     screen.blit((re), (0, 0))
     screen.blit(txt, txt_rct)
