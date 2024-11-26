@@ -59,6 +59,14 @@ def init_bb_imgs() -> tuple[list[pg.Surface], list[int]]:
         lst.append(bb_img)
 
     return lst,accs
+
+def get_kk_img(sum_mv: tuple[int, int]) -> pg.Surface:
+    
+    return 
+
+def calc_orientationn(org: pg.Rect, dst: pg.Rect, current_xy: tuple[float, float]) -> tuple[float,float]:
+
+    return
     
 
 
@@ -69,6 +77,8 @@ def main():
     kk_img = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 0.9)
     kk_rct = kk_img.get_rect()
     kk_rct.center = 300, 200
+    kk_img = get_kk_img((0,0))
+    kk_img = get_kk_img(tuple(sum_mv))
     bb_img = pg.Surface((20,20)) #爆弾用の空サーフェイス
     pg.draw.circle(bb_img, (255,0,0), (10,10), 10) #爆弾円を描く
     bb_img.set_colorkey((0,0,0)) #四隅の黒を透過させる
@@ -77,6 +87,7 @@ def main():
     clock = pg.time.Clock()
     tmr = 0
     vx, vy = +5, +5
+    vx, vy = calc_orientationn(bb_rct, kk_rct, (vx,vy))
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
