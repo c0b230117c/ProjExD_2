@@ -1,6 +1,8 @@
 import os
 import random
 import sys
+import time 
+from datetime import datetime
 
 import pygame as pg
 
@@ -27,6 +29,32 @@ def check_bound(rct:pg.Rect) -> tuple[bool,bool]:
         tate = False
     return yoko,tate
 
+def game_over(screen: pg.Surface) -> None:
+    re = pg.Surface((1100,650))
+    pg.draw.rect(re, (0,0,0), (0,1100,0,560))
+    #screen = pg.Surface.set_alpha()
+    re.set_alpha(122)
+    fonto = pg.font.Font(None,80)
+    txt = fonto.render("Game Over", True, (255,255,255))
+    txt_rct = txt.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+    cry_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)
+    cry_rct = cry_img.get_rect(center=((WIDTH // 4)+80, HEIGHT // 2))
+    cry2_rct = cry_img.get_rect(center=((WIDTH // 4)+100+380, HEIGHT // 2))
+    screen.blit((re), (0, 0))
+    screen.blit(txt, txt_rct)
+    screen.blit(cry_img, cry_rct)
+    screen.blit(cry_img, cry2_rct)
+
+    pg.display.update()
+    time.sleep(5)
+    return re
+
+def init_bb_imgs() -> tuple[list[pg.Surface], list[int]]:
+    accs = [a for a in range(1,11)]
+    for r in range(1,11):
+        bb_img = pg.Surface((20*r, 20*r))
+        pg.draw.circle(bb_img, (255,0,0),(10*r,10*r),10*r)
+    
 
 
 def main():
@@ -49,8 +77,9 @@ def main():
             if event.type == pg.QUIT: 
                 return
         if kk_rct.colliderect(bb_rct):
-            print("game over")
-            return #ゲームオーバー
+            
+            return game_over(screen)
+            
         screen.blit(bg_img, [0, 0]) 
 
         key_lst = pg.key.get_pressed()
@@ -76,7 +105,9 @@ def main():
         pg.display.update()
         tmr += 1
         clock.tick(50)
-
+        bb_imgs, bb_accs = init_bb_imgs()
+        avx = vx*bb_accs[min(tmr//500, 9)]
+        bb_img = bb_imgs[min(tmr//500, 9)]
 
 if __name__ == "__main__":
     pg.init()
